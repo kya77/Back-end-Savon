@@ -98,4 +98,15 @@ class RecetteController(
             ResponseEntity.notFound().build()
         }
     }
+
+    @DeleteMapping("/all")
+    fun deleteAll(): ResponseEntity<Void> {
+        val count = recetteDAO.count()
+        return if (count > 0) {
+            recetteDAO.deleteAll()
+            ResponseEntity.noContent().build()
+        } else {
+            ResponseEntity.notFound().build()
+        }
+    }
 }
